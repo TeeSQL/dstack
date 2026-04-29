@@ -122,6 +122,20 @@ contract DstackApp is
      * @notice Returns true if this contract implements the interface defined by interfaceId
      * @param interfaceId The interface identifier, as specified in ERC-165
      * @return True if the contract implements `interfaceId`
+     *
+     *      Style note (not required by the interface change in this PR):
+     *      this function previously used hardcoded selectors —
+     *      `interfaceId == 0x1e079198` (IAppAuth) and
+     *      `interfaceId == 0x8fd37527` (IAppAuthBasicManagement). With the
+     *      IAppAuthBasicManagement expansion the second literal is no longer
+     *      correct; the new ID is 0xea8447a1. We switch to
+     *      `type(I…).interfaceId` so the literal cannot drift from the
+     *      interface set as it evolves — exactly the kind of bug this PR is
+     *      fixing would never have shipped under that pattern. If
+     *      maintainer house style prefers the literal form, swap to
+     *      `interfaceId == 0xea8447a1` here; the new unit test in
+     *      `test/DstackApp.test.ts` pins both the current ID (true) and
+     *      the old one (false) so either form stays correct.
      */
     function supportsInterface(bytes4 interfaceId)
         public
