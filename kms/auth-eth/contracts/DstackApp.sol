@@ -130,8 +130,7 @@ contract DstackApp is
      *      IAppAuthBasicManagement expansion the second literal is no longer
      *      correct; the new ID is 0xea8447a1. We switch to
      *      `type(I…).interfaceId` so the literal cannot drift from the
-     *      interface set as it evolves — exactly the kind of bug this PR is
-     *      fixing would never have shipped under that pattern. If
+     *      interface set as it evolves. If
      *      maintainer house style prefers the literal form, swap to
      *      `interfaceId == 0xea8447a1` here; the new unit test in
      *      `test/DstackApp.test.ts` pins both the current ID (true) and
